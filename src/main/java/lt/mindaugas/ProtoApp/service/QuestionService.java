@@ -1,23 +1,11 @@
 package lt.mindaugas.ProtoApp.service;
 
-import lt.mindaugas.ProtoApp.entity.Project;
-import lt.mindaugas.ProtoApp.entity.ProjectResponse;
 import lt.mindaugas.ProtoApp.entity.Question;
-import lt.mindaugas.ProtoApp.entity.QuestionResponse;
-import lt.mindaugas.ProtoApp.repository.ProjectRepository;
 import lt.mindaugas.ProtoApp.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.net.CacheRequest;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -29,7 +17,30 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public Question saveQuestion(Question question) {
-        return questionRepository.save(question);
+    public void saveQuestion(Question question) {
+        questionRepository.save(question);
     }
+
+    public Page<Question> getQuestionsByProjectId(int projectId, int page, int pageSize) {
+        return questionRepository.findByProjectId(projectId, PageRequest.of(page, pageSize));
+    }
+
+//    private ResponseEntity<?> fetchQuestionsByIdResponse(Pageable page) {
+//        Page<Question> pageResponse = questionRepository.fetchAllQuestionsById(page);
+//        return ResponseEntity.ok(
+//                new QuestionResponse(
+//                        pageResponse.getPageable().getPageNumber(),
+//                        pageResponse.getPageable().getPageSize(),
+//                        pageResponse.getTotalPages(),
+//                        pageResponse.get().toList()
+//                )
+//        );
+//    }
+//
+//    private int toNumberOrDefault(String value, int defaultValue) {
+//        if (value == null) return defaultValue;
+//        if (value.isBlank()) return defaultValue;
+//        return Integer.parseInt(value);
+//    }
+
 }

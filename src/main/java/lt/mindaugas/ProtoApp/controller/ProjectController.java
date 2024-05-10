@@ -50,6 +50,8 @@ public class ProjectController {
     ){
         ProjectResponse response = (ProjectResponse) projectService.getAllProjects(requestParam).getBody();
         model.addAttribute("attrProjects", response);
+        model.addAttribute("currentPage", response.getPage());
+        model.addAttribute("totalPages", response.getTotalPage());
 //        model.addAttribute("attrSearchProject", new Project()); // Jei darysiu paieska
         return "project/projects_all";
     }

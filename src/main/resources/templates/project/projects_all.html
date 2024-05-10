@@ -29,9 +29,8 @@
                 </thead>
                 <tbody>
                 <tr th:each="project,stat:${attrProjects.data}"
-                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">
-<!--                    th:onclick="'window.location.href=\'/project/' + ${project.projectId} + '/questions\''">-->
-<!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
+                    th:onclick="'window.location.href=\'/project/' + ${project.projectId} + '/questions\''">
+                    <!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
 
                     <td th:text="${project.projectId}">N/A</td>
                     <td th:text="${project.projectShortName}">N/A</td>
@@ -39,15 +38,27 @@
                 </tr>
                 </tbody>
             </table>
-
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" th:classappend="${currentPage == 0} ? disabled : ''">
+                        <a class="page-link" th:href="@{/project/all(page=${currentPage-1})}" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, totalPages-1)}" th:classappend="${pageNumber == currentPage} ? active : ''">
+                        <a class="page-link" th:href="@{/project/all(page=${pageNumber})}" th:text="${pageNumber + 1}"></a>
+                    </li>
+                    <li class="page-item" th:classappend="${currentPage + 1 == totalPages} ? disabled : ''">
+                        <a class="page-link" th:href="@{/project/all(page=${currentPage+1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
 
-<script th:src="@{/js/projects.js}"></script>
+    <!--<script th:src="@{/js/projects.js}"></script>-->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </body>
 </html>

@@ -29,4 +29,9 @@ public class Question {
     private LocalDate dueDate;
     @Column(name = "status")
     private Byte status;
+
+    @PrePersist
+    public void prePersist() {
+        this.createDate = LocalDate.now();
+    }
 }

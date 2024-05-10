@@ -31,8 +31,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="question,stat:${attrQuestions.data}"
-                    th:onclick="#">
+                <tr
+                    th:onclick="#"
+                    th:each="question,stat:${attrQuestions}">
 
                     <!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
 
@@ -54,7 +55,7 @@
 <div class="container">
     <div class="d-flex justify-content-center gap-2">
 
-        <a th:href="@{/project/{projectId}/questions/new(id=${projectId})}" class="btn btn-primary" role="button">Add Question</a>
+        <a th:href="@{/project/{projectId}/questions/new(projectId=${projectId})}" class="btn btn-primary" role="button">Add Question</a>
 
     </div>
 </div>
