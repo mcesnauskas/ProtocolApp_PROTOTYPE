@@ -21,22 +21,43 @@
             <table class="table table-primary table-striped">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Question Id</th>
+                    <th>project Id</th>
                     <th>Question</th>
                     <th>Responsible</th>
-                    <th>Date from</th>
-                    <th>Date to</th>
+                    <th>Create date</th>
+                    <th>Due date</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
+                <tbody>
+                <tr th:each="question,stat:${attrQuestions.data}"
+                    th:onclick="#">
+
+                    <!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
+
+                    <td th:text="${question.questionId}">N/A</td>
+                    <td th:text="${question.projectId}">N/A</td>
+                    <td th:text="${question.question}">N/A</td>
+                    <td th:text="${question.responsiblePerson}">N/A</td>
+                    <td th:text="${question.createDate}">N/A</td>
+                    <td th:text="${question.dueDate}">N/A</td>
+                    <td th:text="${question.status}">N/A</td>
+
+                </tr>
+                </tbody>
             </table>
         </div>
     </div>
 </div>
 
+<div class="container">
+    <div class="d-flex justify-content-center gap-2">
 
+        <a th:href="@{/project/{projectId}/questions/new(id=${projectId})}" class="btn btn-primary" role="button">Add Question</a>
 
-
-
+    </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
