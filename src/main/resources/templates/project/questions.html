@@ -25,7 +25,6 @@
                 <thead>
                 <tr>
                     <th>Question No</th>
-                    <th>project Id</th>
                     <th>Question</th>
                     <th>Responsible</th>
                     <th>Create date</th>
@@ -35,19 +34,15 @@
                 </thead>
                 <tbody>
                 <tr
-                    th:onclick="#"
-                    th:each="question,stat:${attrQuestions}">
-
-                    <!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
+                        th:each="question,stat:${attrQuestions}"
+                        th:onclick="'javascript:showQuestionDetails(\'' + ${question.questionId} + '\');'">
 
                     <td th:text="${question.questionNumber}">N/A</td>
-                    <td th:text="${question.projectId}">N/A</td>
                     <td th:text="${question.question}">N/A</td>
                     <td th:text="${question.responsiblePerson}">N/A</td>
                     <td th:text="${question.createDate}">N/A</td>
                     <td th:text="${question.dueDate}">N/A</td>
                     <td th:text="${question.status}">N/A</td>
-
                 </tr>
                 </tbody>
             </table>
@@ -57,13 +52,19 @@
 
 <div class="container">
     <div class="d-flex justify-content-center gap-2">
-
-        <a th:href="@{/project/{projectId}/questions/new(projectId=${projectId})}" class="btn btn-primary" role="button">Add Question</a>
-
+        <div>
+            <a th:href="@{/project/{projectId}/questions/new(projectId=${projectId})}" class="btn btn-primary"
+               role="button">Add Question</a>
+        </div>
+        <div>
+            <a th:href="@{/project/{projectId}/participants(projectId=${projectId})}" class="btn btn-primary"
+               role="button">EDIT PARTICIPANTS</a>
+        </div>
     </div>
 </div>
 
-
+<script th:src="@{/js/question.js}">
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

@@ -27,12 +27,25 @@ public class ProjectController {
         return "project/project";
     }
 
+//    @PostMapping(path = "/new")
+//    private String postNewProject(
+//            @ModelAttribute("attrProject") Project project
+//    ) {
+//        project = projectService.saveProject(project);
+//        return "redirect:/project/%s/questions/new".formatted(project.getProjectId());
+//    }
+
     @PostMapping(path = "/new")
     private String postNewProject(
-            @ModelAttribute("attrProject") Project project
+            @ModelAttribute("attrProject") Project project,
+            @RequestParam(value = "action", required = true) String action
     ) {
         project = projectService.saveProject(project);
-        return "redirect:/project/%s/questions/new".formatted(project.getProjectId());
+        if (action.equals("ADD PARTICIPANT")) {
+            return "redirect:/project/" + project.getProjectId() + "/participants/new";
+        } else {
+            return "redirect:/project/" + project.getProjectId() + "/questions/new";
+        }
     }
 
     @PostMapping(path = "/{id:\\d+}/questions")

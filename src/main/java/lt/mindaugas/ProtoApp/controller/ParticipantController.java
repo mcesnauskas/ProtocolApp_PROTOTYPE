@@ -1,17 +1,51 @@
 package lt.mindaugas.ProtoApp.controller;
 
+import lt.mindaugas.ProtoApp.entity.Participant;
+import lt.mindaugas.ProtoApp.entity.Question;
+import lt.mindaugas.ProtoApp.service.ParticipantService;
+import lt.mindaugas.ProtoApp.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(path = "/project")
 public class ParticipantController {
+    @Autowired
+    private ParticipantService participantService;
+    @Autowired
+    private ProjectService projectService;
 
-    @GetMapping(path = "/participant")
-    private String getParticipant(Model model){
-        model.addAttribute("attrName", "Welcome to the participant page!");
-        return "project/participant";
+    @GetMapping(path = "/{projectId}/participants/new")
+    public String getNewParticipant(@PathVariable("projectId") int projectId, Model model) {
+        Participant participant = new Participant();
+        participant.setProjectId(projectId);
+        model.addAttribute("attrParticipant", participant);
+        return "project/participant_new";
     }
+
+    @PostMapping(path = "/{projectId}/participants/new")
+    private String postNewParticipant(@PathVariable("projectId") int projectId,
+                                     @ModelAttribute("attrParticipant") Participant participant) {
+        participant.setProjectId(projectId);
+        participantService.saveParticipant(participant);
+        return "redirect:/project/" + projectId + "/questions/new";
+    }
+
+    @GetMapping(path = "/{projectId}/participants")
+    public String getParticipantsByProjectId(@PathVariable("projectId") int projectId,
+                                             @RequestParam(name = "page", defaultValue = "0") int page,
+                                             @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
+                                             Model model) {
+        Page<Participant> participantsPage = participantService.getParticipantsByProjectId(projectId, page, pageSize);
+        model.addAttribute("projectId", projectId);
+        model.addAttribute("attrParticipants", participantsPage.getContent());
+        model.addAttribute("currentPage", participantsPage.getNumber());
+        model.addAttribute("totalPages", participantsPage.getTotalPages());
+        return "project/participants_all";
+    }
+
+
 }

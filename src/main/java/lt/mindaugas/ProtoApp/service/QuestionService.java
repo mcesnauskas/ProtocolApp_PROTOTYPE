@@ -38,7 +38,7 @@ public class QuestionService {
     }
 
     public Page<Question> getQuestionsByProjectId(int projectId, int page, int pageSize) {
-        return questionRepository.findByProjectId(projectId, PageRequest.of(page, pageSize));
+        return questionRepository.findQuestionByProjectId(projectId, PageRequest.of(page, pageSize));
     }
 
 //    private ResponseEntity<?> fetchQuestionsByIdResponse(Pageable page) {

@@ -10,7 +10,7 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
     @Query(value = "SELECT * FROM question WHERE project_id = ?1 AND status = 1",
             countQuery = "SELECT count(*) FROM question WHERE project_id = ?1 AND status = 1",
             nativeQuery = true)
-    Page<Question> findByProjectId(int projectId, Pageable pageable);
+    Page<Question> findQuestionByProjectId(int projectId, Pageable pageable);
 
     @Query(value = "SELECT * FROM question WHERE project_id = ?1 ORDER BY question_number DESC LIMIT 1",
             nativeQuery = true)
