@@ -29,7 +29,7 @@ public class QuestionService {
     }
 
     private int getNextQuestionNumber(int projectId) {
-        Question lastQuestion = questionRepository.findTopByProjectIdOrderByQuestionNumberDesc(projectId);
+        Question lastQuestion = questionRepository.findLastQuestionNumberByProjectId(projectId);
         if (lastQuestion == null) {
             return 1;
         } else {
