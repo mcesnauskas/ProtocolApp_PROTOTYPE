@@ -30,6 +30,9 @@ public class Question {
     @Column(name = "status")
     private Byte status;
 
+    @Column(name = "question_number")
+    private Integer questionNumber;
+
     @PrePersist
     public void prePersist() {
         this.createDate = LocalDate.now();

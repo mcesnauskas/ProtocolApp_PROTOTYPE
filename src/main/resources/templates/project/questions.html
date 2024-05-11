@@ -16,12 +16,15 @@
 </div>
 <hr>
 <div class="container">
+    <p>Project name: <span th:text="${attrProjectShortName}"></span></p>
+</div>
+<div class="container">
     <div class="d-flex justify-content-center gap-2">
         <div>
             <table class="table table-primary table-striped">
                 <thead>
                 <tr>
-                    <th>Question Id</th>
+                    <th>Question No</th>
                     <th>project Id</th>
                     <th>Question</th>
                     <th>Responsible</th>
@@ -37,7 +40,7 @@
 
                     <!--                    th:onclick="'javascript:showProjectQuestions(\'' + ${project.projectId} + '\');'">-->
 
-                    <td th:text="${question.questionId}">N/A</td>
+                    <td th:text="${question.questionNumber}">N/A</td>
                     <td th:text="${question.projectId}">N/A</td>
                     <td th:text="${question.question}">N/A</td>
                     <td th:text="${question.responsiblePerson}">N/A</td>

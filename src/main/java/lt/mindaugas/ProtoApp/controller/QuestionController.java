@@ -1,5 +1,6 @@
 package lt.mindaugas.ProtoApp.controller;
 
+import lt.mindaugas.ProtoApp.entity.Project;
 import lt.mindaugas.ProtoApp.entity.Question;
 import lt.mindaugas.ProtoApp.service.ProjectService;
 import lt.mindaugas.ProtoApp.service.QuestionService;
@@ -35,7 +36,7 @@ public class QuestionController {
         question.setProjectId(projectId);
         question.setStatus((byte) 1);
         questionService.saveQuestion(question);
-        return "redirect:/project/" + projectId + "/questions/new";
+        return "redirect:/project/" + projectId + "/questions";
     }
 
     // Methods to get questions by projectID:
@@ -46,6 +47,8 @@ public class QuestionController {
                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                           Model model) {
         Page<Question> questionsPage = questionService.getQuestionsByProjectId(projectId, page, pageSize);
+        String name = projectService.getProjectShortName(projectId);
+        model.addAttribute("attrProjectShortName", name);
         model.addAttribute("attrQuestions", questionsPage.getContent());
         model.addAttribute("currentPage", questionsPage.getNumber());
         model.addAttribute("totalPages", questionsPage.getTotalPages());

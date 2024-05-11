@@ -35,6 +35,10 @@ public class ProjectService {
         );
     }
 
+    public String getProjectShortName(int projectId) {
+        return projectRepository.fetchShortNameById(projectId);
+    }
+
     private ResponseEntity<?> fetchAllProjectsResponse(Pageable page) {
         Page<Project> pageResponse = projectRepository.fetchAllProjects(page);
         return ResponseEntity.ok(

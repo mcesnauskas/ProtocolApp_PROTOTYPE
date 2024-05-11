@@ -17,8 +17,24 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public void saveQuestion(Question question) {
-        questionRepository.save(question);
+//    public void saveQuestion(Question question) {
+//        questionRepository.save(question);
+//    }
+
+    public Question saveQuestion(Question question) {
+        int projectId = question.getProjectId();
+        int nextQuestionNumber = getNextQuestionNumber(projectId);
+        question.setQuestionNumber(nextQuestionNumber);
+        return questionRepository.save(question);
+    }
+
+    private int getNextQuestionNumber(int projectId) {
+        Question lastQuestion = questionRepository.findTopByProjectIdOrderByQuestionNumberDesc(projectId);
+        if (lastQuestion == null) {
+            return 1;
+        } else {
+            return lastQuestion.getQuestionNumber() + 1;
+        }
     }
 
     public Page<Question> getQuestionsByProjectId(int projectId, int page, int pageSize) {
