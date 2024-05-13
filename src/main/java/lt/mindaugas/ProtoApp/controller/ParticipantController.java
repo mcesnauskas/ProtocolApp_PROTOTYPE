@@ -31,7 +31,7 @@ public class ParticipantController {
                                      @ModelAttribute("attrParticipant") Participant participant) {
         participant.setProjectId(projectId);
         participantService.saveParticipant(participant);
-        return "redirect:/project/" + projectId + "/questions/new";
+        return "redirect:/project/" + projectId + "/participants/new";
     }
 
     @GetMapping(path = "/{projectId}/participants")

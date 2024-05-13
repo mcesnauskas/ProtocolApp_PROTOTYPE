@@ -62,15 +62,21 @@
                 <input th:field="*{phone}" type="tel" class="form-control" id="inputPhone">
             </div>
 
-            <div class="d-flex justify-content-center align-items-center mt-4">
+            <div class="d-flex justify-content-center align-items-center mt-4 gap-4">
                 <div>
                     <input type="submit" class="btn btn-primary" value="SAVE"/>
+                </div>
+                <div>
+                    <a th:href="@{/project/{projectId}/questions/new(projectId=${projectId})}" class="btn btn-primary"
+                       role="button">Add Question</a>
                 </div>
             </div>
         </form>
 
     </div>
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -5,52 +6,70 @@
     <title>Projektai</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #f8f9fa;
+            width: 50%;
+            margin: 0 auto;
+        }
+        @media (max-width: 600px) {
+            .container {
+            width: 80%;
+            }
+        }
+        ::placeholder {
+            font-size: 14px;
+        }
+        h2 {
+            cursor: default;
+        }
+        a {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<div class="container text-center">
-    <h2 class=" text-primary m-2">Questions</h2>
-</div>
-<hr>
-<div class="d-flex justify-content-center align-items-center mb-3">
-    <a th:href="@{/home}" class="fs-6 fw-medium text-info">HOME</a>
-</div>
-<hr>
-<div class="container">
-    <p>Project name: <span th:text="${attrProjectShortName}"></span></p>
-</div>
-<div class="container">
-    <div class="d-flex justify-content-center gap-2">
-        <div>
-            <table class="table table-primary table-striped">
-                <thead>
-                <tr>
-                    <th>Question No</th>
-                    <th>Question</th>
-                    <th>Responsible</th>
-                    <th>Create date</th>
-                    <th>Due date</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr
-                        th:each="question,stat:${attrQuestions}"
-                        th:onclick="'javascript:showQuestionDetails(\'' + ${question.questionId} + '\');'">
-
-                    <td th:text="${question.questionNumber}">N/A</td>
-                    <td th:text="${question.question}">N/A</td>
-                    <td th:text="${question.responsiblePerson}">N/A</td>
-                    <td th:text="${question.createDate}">N/A</td>
-                    <td th:text="${question.dueDate}">N/A</td>
-                    <td th:text="${question.status}">N/A</td>
-                </tr>
-                </tbody>
-            </table>
+<div class="container p-4">
+    <div class="row align-items-center mb-4">
+        <div class="col">
+            <h2 class="text-info">Protocol</h2>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <a th:href="@{/home}" class="fs-6 fw-medium text-info">BACK</a>
         </div>
     </div>
-</div>
+    <div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Question No</th>
+                <th>Question</th>
+                <th>Responsible</th>
+                <th>Create date</th>
+                <th>Due date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    th:each="question,stat:${attrQuestions}"
+                    th:onclick="'javascript:showQuestionDetails(\'' + ${question.questionId} + '\');'">
 
-<div class="container">
+                <td th:text="${question.questionNumber}">N/A</td>
+                <td th:text="${question.question}">N/A</td>
+                <td th:text="${question.responsiblePerson}">N/A</td>
+                <td th:text="${question.createDate}">N/A</td>
+                <td th:text="${question.dueDate}">N/A</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="d-flex justify-content-center gap-2">
         <div>
             <a th:href="@{/project/{projectId}/questions/new(projectId=${projectId})}" class="btn btn-primary"

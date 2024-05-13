@@ -55,6 +55,4 @@ public class QuestionController {
         model.addAttribute("projectId", projectId);
         return "project/questions";
     }
-
-
 }

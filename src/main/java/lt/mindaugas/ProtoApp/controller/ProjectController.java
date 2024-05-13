@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,6 +19,8 @@ import java.util.Map;
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+
+
 
 //    NEW PROJECT
 
@@ -42,9 +45,11 @@ public class ProjectController {
     ) {
         project = projectService.saveProject(project);
         if (action.equals("ADD PARTICIPANT")) {
-            return "redirect:/project/" + project.getProjectId() + "/participants/new";
+            return "redirect:/project/all";
+//            return "redirect:/project/" + project.getProjectId() + "/participants/new";
         } else {
-            return "redirect:/project/" + project.getProjectId() + "/questions/new";
+            return "redirect:/project/all";
+//            return "redirect:/project/" + project.getProjectId() + "/questions/new";
         }
     }
 

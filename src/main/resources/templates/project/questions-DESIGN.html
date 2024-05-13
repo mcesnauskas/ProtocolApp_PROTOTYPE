@@ -41,11 +41,11 @@
             <h2 class="text-info">Participants</h2>
         </div>
         <div class="col d-flex justify-content-end">
-            <a th:href="@{/project/all}" class="fs-6 fw-medium text-info">BACK</a>
+            <a th:href="@{/home}" class="fs-6 fw-medium text-info">BACK</a>
         </div>
     </div>
     <div>
-        <table class="table table-hover">
+        <table class="table table-info table-striped table-hover">
             <thead>
             <tr>
                 <th>Id</th>
@@ -54,8 +54,8 @@
                 <th>Representative</th>
                 <th>Initials</th>
                 <th>Position</th>
-                <th>Contacts</th>
-
+                <th>Email</th>
+                <th>Phone</th>
             </tr>
             </thead>
             <tbody>
@@ -69,11 +69,8 @@
                 <td th:text="${participant.representativesName}">N/A</td>
                 <td th:text="${participant.initials}">N/A</td>
                 <td th:text="${participant.position}">N/A</td>
-                <td>
-                    <span th:text="${participant.email}">N/A</span>
-                    <br>
-                    <span th:text="${participant.phone}">N/A</span>
-                </td>
+                <td th:text="${participant.email}">N/A</td>
+                <td th:text="${participant.phone}">N/A</td>
             </tr>
             </tbody>
         </table>
@@ -90,12 +87,12 @@
                 </li>
             </ul>
         </nav>
-    </div>
+</div>
 
-    <script th:src="@{/js/question.js}">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-            crossorigin="anonymous"></script>
+<script th:src="@{/js/question.js}">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>
