@@ -29,6 +29,8 @@ public class Question {
     private LocalDate dueDate;
     @Column(name = "status")
     private Byte status;
+    @Column(name = "comment")
+    private String comment;
 
     @Column(name = "question_number")
     private Integer questionNumber;

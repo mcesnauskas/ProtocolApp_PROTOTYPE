@@ -46,21 +46,19 @@
             <a th:href="@{'/project/' + ${projectId} + '/questions'}" class="fs-6 fw-medium text-info">CANCEL</a>
         </div>
     </div>
-
-    <div class="d-flex justify-content-center align-items-center mt-4">
-
-        <div class="m-2">
-            <form th:action="@{'/project/' + ${projectId} + '/questions/' + ${attrQuestion.questionId} + '/resolve'}" method="post">
-                <div class="d-flex justify-content-center align-items-center mt-4">
-                    <div class="m-2">
-                        <input type="submit" class="btn btn-primary" name="action" value="Mark resolved"/>
-                    </div>
-                </div>
-            </form>
+    <form th:action="@{'/project/' + ${projectId} + '/questions/' + ${attrQuestion.questionId} + '/resolve'}"
+          method="post">
+        <div class="form-floating">
+            <textarea name="comment" class="form-control" placeholder="Add comment" id="commentAreaId"
+                      style="height: 100px"></textarea>
+            <label for="commentAreaId">Add comment</label>
         </div>
-    </div>
-
-
+        <div class="d-flex justify-content-center align-items-center mt-4">
+            <div class="m-2">
+                <input type="submit" class="btn btn-primary" value="Mark resolved"/>
+            </div>
+        </div>
+    </form>
 </div>
 
 

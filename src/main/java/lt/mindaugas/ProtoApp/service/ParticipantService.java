@@ -5,14 +5,15 @@ import lt.mindaugas.ProtoApp.repository.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ParticipantService {
-    private final int defaultPage = 0;
-    private final int defaultPageSize = 5;
-    public static final String PARAM_PAGE = "page";
-    public static final String PARAM_PAGE_SIZE = "page_size";
+//    private final int defaultPage = 0;
+//    private final int defaultPageSize = 5;
+//    public static final String PARAM_PAGE = "page";
+//    public static final String PARAM_PAGE_SIZE = "page_size";
 
     @Autowired
     private ParticipantRepository participantRepository;

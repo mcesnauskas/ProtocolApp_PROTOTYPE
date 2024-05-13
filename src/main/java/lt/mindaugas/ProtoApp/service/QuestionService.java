@@ -36,8 +36,15 @@ public class QuestionService {
         return questionRepository.findQuestionById(questionId);
     }
 
-    public void resolveQuestion(int questionId) {
-        Question question = questionRepository.findById(questionId).get();
+//    public void resolveQuestion(int questionId) {
+//        Question question = questionRepository.findById(questionId).get();
+//        question.setStatus((byte) 0);
+//        questionRepository.save(question);
+//    }
+
+    public void updateQuestionCommentAndStatus(Integer questionId, String comment) {
+        Question question = questionRepository.findQuestionById(questionId);
+        question.setComment(comment);
         question.setStatus((byte) 0);
         questionRepository.save(question);
     }

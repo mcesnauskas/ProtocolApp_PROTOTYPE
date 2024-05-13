@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class ProjectService {
     private final int defaultPage = 0;
-    private final int defaultPageSize = 5;
+    private final int defaultPageSize = 10;
     public static final String PARAM_PAGE = "page";
     public static final String PARAM_PAGE_SIZE = "page_size";
 
