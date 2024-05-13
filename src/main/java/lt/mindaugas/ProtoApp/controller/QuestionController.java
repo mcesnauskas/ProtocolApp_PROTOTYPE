@@ -1,7 +1,9 @@
 package lt.mindaugas.ProtoApp.controller;
 
+import lt.mindaugas.ProtoApp.entity.Participant;
 import lt.mindaugas.ProtoApp.entity.Project;
 import lt.mindaugas.ProtoApp.entity.Question;
+import lt.mindaugas.ProtoApp.service.ParticipantService;
 import lt.mindaugas.ProtoApp.service.ProjectService;
 import lt.mindaugas.ProtoApp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class QuestionController {
     private QuestionService questionService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ParticipantService participantService;
 
     // Methods to add a new question:
 
@@ -31,12 +35,16 @@ public class QuestionController {
     }
 
     @PostMapping(path = "/{projectId}/questions/new")
-    private String postNewQuestion(@PathVariable("projectId") int projectId,
-                                   @ModelAttribute("attrQuestion") Question question) {
-        question.setProjectId(projectId);
-        question.setStatus((byte) 1);
-        questionService.saveQuestion(question);
-        return "redirect:/project/" + projectId + "/questions";
+    public String addNewQuestion(@PathVariable("projectId") int projectId,
+                                 @ModelAttribute("attrQuestion") Question question,
+                                 Model model) {
+        if (question.getQuestion().isEmpty()) {
+            return "project/question_new";
+        } else {
+            question.setStatus((byte) 1);
+            questionService.saveQuestion(question);
+            return "redirect:/project/" + projectId + "/questions";
+        }
     }
 
     // Methods to get questions by projectID:
@@ -47,12 +55,30 @@ public class QuestionController {
                                           @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                           Model model) {
         Page<Question> questionsPage = questionService.getQuestionsByProjectId(projectId, page, pageSize);
+        Page<Participant> participantsPage = participantService.getParticipantsByProjectId(projectId, page, pageSize);
         String name = projectService.getProjectShortName(projectId);
         model.addAttribute("attrProjectShortName", name);
         model.addAttribute("attrQuestions", questionsPage.getContent());
+        model.addAttribute("attrParticipants", participantsPage.getContent());
         model.addAttribute("currentPage", questionsPage.getNumber());
         model.addAttribute("totalPages", questionsPage.getTotalPages());
         model.addAttribute("projectId", projectId);
         return "project/questions";
+    }
+
+    @GetMapping(path = "/{projectId}/questions/{questionId}")
+    public String getEditParticipant(@PathVariable("projectId") int projectId,
+                                     @PathVariable("questionId") int questionId,
+                                     Model model) {
+        Question question = questionService.getQuestionById(questionId);
+        model.addAttribute("attrQuestion", question);
+        return "project/question_edit";
+    }
+
+    @PostMapping(path = "/{projectId}/questions/{questionId}/resolve")
+    public String resolveQuestion(@PathVariable("projectId") int projectId,
+                                  @PathVariable("questionId") int questionId) {
+        questionService.resolveQuestion(questionId);
+        return "redirect:/project/" + projectId + "/questions";
     }
 }

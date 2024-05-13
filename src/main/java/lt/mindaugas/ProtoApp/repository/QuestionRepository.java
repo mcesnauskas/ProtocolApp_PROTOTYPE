@@ -16,4 +16,7 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
             nativeQuery = true)
     Question findLastQuestionNumberByProjectId(int projectId);
 
+    @Query(value = "SELECT * FROM question WHERE question_id = ?1",
+            nativeQuery = true)
+    Question findQuestionById(int questionId);
 }

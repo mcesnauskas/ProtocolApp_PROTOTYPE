@@ -12,4 +12,8 @@ public interface ParticipantRepository extends CrudRepository<Participant, Integ
     @Query(value = "SELECT * FROM participant WHERE project_id = ?1",
             nativeQuery = true)
     Page<Participant> findParticipantByProjectId(int projectId, Pageable pageable);
+
+    @Query(value = "SELECT * FROM participant WHERE participant_id = ?1",
+            nativeQuery = true)
+    Participant findParticipantById(int participantId);
 }

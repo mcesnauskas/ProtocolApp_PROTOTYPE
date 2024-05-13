@@ -25,4 +25,13 @@ public class ParticipantService {
     public void saveParticipant(Participant participant) {
         participantRepository.save(participant);
     }
+
+    public Participant getParticipantById(int participantId) {
+        return participantRepository.findParticipantById(participantId);
+    }
+
+    public void updateParticipant(Participant participant) {
+        participantRepository.save(participant);
+    }
+
 }

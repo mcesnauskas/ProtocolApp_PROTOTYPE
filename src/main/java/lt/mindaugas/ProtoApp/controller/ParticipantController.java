@@ -26,12 +26,26 @@ public class ParticipantController {
         return "project/participant_new";
     }
 
+//    @PostMapping(path = "/{projectId}/participants/new")
+//    public String postNewParticipant(@PathVariable("projectId") int projectId,
+//                                     @ModelAttribute("attrParticipant") Participant participant,
+//                                     Model model) {
+//        participant.setProjectId(projectId);
+//        participantService.saveParticipant(participant);
+//        return "redirect:/project/" + projectId + "/questions";
+//    }
+
     @PostMapping(path = "/{projectId}/participants/new")
-    private String postNewParticipant(@PathVariable("projectId") int projectId,
-                                     @ModelAttribute("attrParticipant") Participant participant) {
+    public String postNewParticipant(@PathVariable("projectId") int projectId,
+                                     @ModelAttribute("attrParticipant") Participant participant,
+                                     Model model) {
         participant.setProjectId(projectId);
-        participantService.saveParticipant(participant);
-        return "redirect:/project/" + projectId + "/participants/new";
+        if (participant.getParticipantId() != null) {
+            participantService.updateParticipant(participant);
+        } else {
+            participantService.saveParticipant(participant);
+        }
+        return "redirect:/project/" + projectId + "/questions";
     }
 
     @GetMapping(path = "/{projectId}/participants")
@@ -47,5 +61,13 @@ public class ParticipantController {
         return "project/participants_all";
     }
 
+    @GetMapping(path = "/{projectId}/participants/{participantId}")
+    public String getEditParticipant(@PathVariable("projectId") int projectId,
+                                     @PathVariable("participantId") int participantId,
+                                     Model model) {
+        Participant participant = participantService.getParticipantById(participantId);
+        model.addAttribute("attrParticipant", participant);
+        return "project/participant_new";
+    }
 
 }
