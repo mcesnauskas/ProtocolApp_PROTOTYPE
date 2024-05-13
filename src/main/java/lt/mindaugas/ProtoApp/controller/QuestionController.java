@@ -1,7 +1,6 @@
 package lt.mindaugas.ProtoApp.controller;
 
 import lt.mindaugas.ProtoApp.entity.Participant;
-import lt.mindaugas.ProtoApp.entity.Project;
 import lt.mindaugas.ProtoApp.entity.Question;
 import lt.mindaugas.ProtoApp.service.ParticipantService;
 import lt.mindaugas.ProtoApp.service.ProjectService;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping(path = "/project")
 public class QuestionController {
@@ -23,8 +20,6 @@ public class QuestionController {
     private ProjectService projectService;
     @Autowired
     private ParticipantService participantService;
-
-    // Methods to add a new question:
 
     @GetMapping(path = "/{projectId}/questions/new")
     public String getNewQuestion(@PathVariable("projectId") int projectId, Model model) {
@@ -46,8 +41,6 @@ public class QuestionController {
             return "redirect:/project/" + projectId + "/questions";
         }
     }
-
-    // Methods to get questions by projectID:
 
     @GetMapping(path = "/{projectId}/questions")
     public String getQuestionsByProjectId(@PathVariable("projectId") int projectId,

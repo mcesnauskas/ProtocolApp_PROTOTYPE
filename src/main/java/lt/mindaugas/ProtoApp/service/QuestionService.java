@@ -1,6 +1,5 @@
 package lt.mindaugas.ProtoApp.service;
 
-import lt.mindaugas.ProtoApp.entity.Participant;
 import lt.mindaugas.ProtoApp.entity.Question;
 import lt.mindaugas.ProtoApp.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
