@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -42,15 +43,26 @@ public class ProjectController {
         return "redirect:/project/%s/questions".formatted(project.getProjectId());
     }
 
+//    // With pagination
+//
+//    @GetMapping(path = "/all")
+//    private String getAllProjects(
+//            @RequestParam(required = false) Map<String, String> requestParam,
+//            Model model
+//    ){
+//        ProjectResponse response = (ProjectResponse) projectService.getAllProjects(requestParam).getBody();
+//        model.addAttribute("attrProjects", response);
+//        model.addAttribute("currentPage", response.getPage());
+//        model.addAttribute("totalPages", response.getTotalPage());
+//        return "project/projects_all";
+//    }
+
+    // Without pagination
+
     @GetMapping(path = "/all")
-    private String getAllProjects(
-            @RequestParam(required = false) Map<String, String> requestParam,
-            Model model
-    ){
-        ProjectResponse response = (ProjectResponse) projectService.getAllProjects(requestParam).getBody();
-        model.addAttribute("attrProjects", response);
-        model.addAttribute("currentPage", response.getPage());
-        model.addAttribute("totalPages", response.getTotalPage());
+    private String getAllProjects(Model model){
+        List<Project> projects = projectService.getAllProjects();
+        model.addAttribute("attrProjects", projects);
         return "project/projects_all";
     }
 }

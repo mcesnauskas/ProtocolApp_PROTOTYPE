@@ -64,7 +64,7 @@
         </div>
         <div class="col" id="col2">
             <select id="projectSelect" class="form-select" size="5" aria-label="Size 4 select example">
-                <option th:each="project,stat:${attrProjects.data}"
+                <option th:each="project : ${attrProjects}"
                         th:value="${project.projectId}"
                         th:data-full-name="${project.projectFullName}"
                         th:text="${project.projectId + ' - ' + project.projectShortName}">

@@ -102,7 +102,7 @@
             </div>
         </div>
         <div>
-            <table th:if="${!attrQuestions.empty}" class="table table-hover">
+            <table th:if="${!attrQuestions.empty}" class="table table-hover pr-0">
                 <thead>
                 <tr>
                     <th>No.</th>
@@ -125,7 +125,7 @@
                     <td th:text="${question.dueDate}">N/A</td>
                     <td>
                         <form th:action="@{'/project/' + ${projectId} + '/questions/' + ${question.questionId} + '/updateStatus'}" method="post">
-                            <button type="submit" class="btn btn-primary">Change Status</button>
+                            <button type="submit" class="btn btn-light btn-sm">Change Status</button>
                         </form>
                     </td>
                 </tr>

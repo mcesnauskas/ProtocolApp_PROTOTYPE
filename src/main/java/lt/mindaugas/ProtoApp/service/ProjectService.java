@@ -27,13 +27,21 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public ResponseEntity<?> getAllProjects(Map<String, String> requestParam) {
-        return fetchAllProjectsResponse(
-                PageRequest.of(
-                        toNumberOrDefault(requestParam.get(PARAM_PAGE), defaultPage),
-                        toNumberOrDefault(requestParam.get(PARAM_PAGE_SIZE), defaultPageSize)
-                )
-        );
+    // With pagination
+
+//    public ResponseEntity<?> getAllProjects(Map<String, String> requestParam) {
+//        return fetchAllProjectsResponse(
+//                PageRequest.of(
+//                        toNumberOrDefault(requestParam.get(PARAM_PAGE), defaultPage),
+//                        toNumberOrDefault(requestParam.get(PARAM_PAGE_SIZE), defaultPageSize)
+//                )
+//        );
+//    }
+
+    // Without pagination
+
+    public List<Project> getAllProjects() {
+        return (List<Project>) projectRepository.findAll();
     }
 
     public String getProjectShortName(int projectId) {
