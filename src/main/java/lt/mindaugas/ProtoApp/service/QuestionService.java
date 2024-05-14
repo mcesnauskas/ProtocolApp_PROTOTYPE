@@ -27,9 +27,17 @@ public class QuestionService {
         return questionRepository.findQuestionById(questionId);
     }
 
-    public void updateQuestionComment(Integer questionId, String comment) {
+    public void updateQuestionComment(Integer questionId, String newComment) {
         Question question = questionRepository.findQuestionById(questionId);
-        question.setComment(comment);
+        String existingComment = question.getComment();
+
+        if (existingComment != null && !existingComment.isEmpty()) {
+            newComment = existingComment + "<br>COMMENT: " + newComment;
+        } else {
+            newComment = "COMMENT: " + newComment;
+        }
+
+        question.setComment(newComment);
         questionRepository.save(question);
     }
 

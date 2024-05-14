@@ -119,7 +119,7 @@
                         th:onclick="'window.location.href=\'/project/' + ${projectId} + '/questions/' + ${question.questionId} + '\''">
 
                     <td th:text="${question.questionNumber}">N/A</td>
-                    <td th:utext="${question.comment != null && !question.comment.isEmpty() ? question.question + '<br>COMMENT: <i>' + question.comment + '</i>' : question.question}">N/A</td>
+                    <td th:utext="${question.comment != null && !question.comment.isEmpty() ? question.question + '<br><i>' + question.comment + '</i>' : question.question}">N/A</td>
                     <td th:text="${question.responsiblePerson}">N/A</td>
                     <td th:text="${question.createDate}">N/A</td>
                     <td th:text="${question.dueDate}">N/A</td>
