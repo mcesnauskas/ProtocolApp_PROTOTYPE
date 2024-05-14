@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/project")
 public class QuestionController {
@@ -26,6 +28,11 @@ public class QuestionController {
         Question question = new Question();
         question.setProjectId(projectId);
         model.addAttribute("attrQuestion", question);
+
+        // Get participants for the question
+        List<Participant> participants = participantService.getParticipantsByProjectId(projectId, 0, 100).getContent();
+        model.addAttribute("participants", participants);
+
         return "project/question_new";
     }
 

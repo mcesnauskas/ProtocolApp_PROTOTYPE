@@ -58,7 +58,11 @@
 
         <div class="row mt-2">
             <div class="col">
-                <input th:field="*{responsiblePerson}" type="text" class="form-control" placeholder="Initials of responsible person" aria-label="Initials of responsible person">
+<!--                <input th:field="*{responsiblePerson}" type="text" class="form-control" placeholder="Initials of responsible person" aria-label="Initials of responsible person">-->
+                <select th:field="*{responsiblePerson}" class="form-control" multiple>
+                    <option value="EVERYONE">EVERYONE</option>
+                    <option th:each="participant : ${participants}" th:value="${participant.initials}" th:text="${participant.initials}"></option>
+                </select>
             </div>
             <div class="col">
                 <input th:field="*{dueDate}" type="date" class="form-control" placeholder="Due date" aria-label="Due date">
