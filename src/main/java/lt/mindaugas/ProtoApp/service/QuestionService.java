@@ -12,20 +12,11 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public Question saveQuestion(Question question) {
+    public void saveQuestion(Question question) {
         int projectId = question.getProjectId();
         int nextQuestionNumber = getNextQuestionNumber(projectId);
         question.setQuestionNumber(nextQuestionNumber);
-        return questionRepository.save(question);
-    }
-
-    private int getNextQuestionNumber(int projectId) {
-        Question lastQuestion = questionRepository.findLastQuestionNumberByProjectId(projectId);
-        if (lastQuestion == null) {
-            return 1;
-        } else {
-            return lastQuestion.getQuestionNumber() + 1;
-        }
+        questionRepository.save(question);
     }
 
     public Page<Question> getQuestionsByProjectId(int projectId, int page, int pageSize) {
@@ -36,16 +27,24 @@ public class QuestionService {
         return questionRepository.findQuestionById(questionId);
     }
 
-//    public void resolveQuestion(int questionId) {
-//        Question question = questionRepository.findById(questionId).get();
-//        question.setStatus((byte) 0);
-//        questionRepository.save(question);
-//    }
-
-    public void updateQuestionCommentAndStatus(Integer questionId, String comment) {
+    public void updateQuestionComment(Integer questionId, String comment) {
         Question question = questionRepository.findQuestionById(questionId);
         question.setComment(comment);
-        question.setStatus((byte) 0);
         questionRepository.save(question);
+    }
+
+    public void updateQuestionStatus(Integer questionId, byte status) {
+        Question question = questionRepository.findQuestionById(questionId);
+        question.setStatus(status);
+        questionRepository.save(question);
+    }
+
+    private int getNextQuestionNumber(int projectId) {
+        Question lastQuestion = questionRepository.findLastQuestionNumberByProjectId(projectId);
+        if (lastQuestion == null) {
+            return 1;
+        } else {
+            return lastQuestion.getQuestionNumber() + 1;
+        }
     }
 }

@@ -68,18 +68,19 @@ public class QuestionController {
         return "project/question_edit";
     }
 
-//    @PostMapping(path = "/{projectId}/questions/{questionId}/resolve")
-//    public String resolveQuestion(@PathVariable("projectId") int projectId,
-//                                  @PathVariable("questionId") int questionId) {
-//        questionService.resolveQuestion(questionId);
-//        return "redirect:/project/" + projectId + "/questions";
-//    }
 
-    @PostMapping(path = "/{projectId}/questions/{questionId}/resolve")
+    @PostMapping(path = "/{projectId}/questions/{questionId}/addComment")
     public String resolveQuestion(@PathVariable("projectId") Integer projectId,
                                   @PathVariable("questionId") Integer questionId,
                                   @RequestParam("comment") String comment) {
-        questionService.updateQuestionCommentAndStatus(questionId, comment);
+        questionService.updateQuestionComment(questionId, comment);
+        return "redirect:/project/" + projectId + "/questions";
+    }
+
+    @PostMapping(path = "/{projectId}/questions/{questionId}/updateStatus")
+    public String updateQuestionStatus(@PathVariable("projectId") Integer projectId,
+                                       @PathVariable("questionId") Integer questionId) {
+        questionService.updateQuestionStatus(questionId, (byte) 0);
         return "redirect:/project/" + projectId + "/questions";
     }
 }

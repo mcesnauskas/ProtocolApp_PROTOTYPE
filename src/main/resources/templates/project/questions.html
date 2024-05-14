@@ -110,6 +110,7 @@
                     <th>Responsible</th>
                     <th>Create date</th>
                     <th>Due date</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -118,15 +119,20 @@
                         th:onclick="'window.location.href=\'/project/' + ${projectId} + '/questions/' + ${question.questionId} + '\''">
 
                     <td th:text="${question.questionNumber}">N/A</td>
-                    <td th:text="${question.question}">N/A</td>
+                    <td th:utext="${question.comment != null && !question.comment.isEmpty() ? question.question + '<br>COMMENT: <i>' + question.comment + '</i>' : question.question}">N/A</td>
                     <td th:text="${question.responsiblePerson}">N/A</td>
                     <td th:text="${question.createDate}">N/A</td>
                     <td th:text="${question.dueDate}">N/A</td>
+                    <td>
+                        <form th:action="@{'/project/' + ${projectId} + '/questions/' + ${question.questionId} + '/updateStatus'}" method="post">
+                            <button type="submit" class="btn btn-primary">Change Status</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
             <!-- Questions Pagination -->
-            <nav aria-label="Page navigation example">
+            <nav th:if="${!attrQuestions.empty}" aria-label="Page navigation example">
                 <ul class="pagination pagination-sm justify-content-center">
                     <li class="page-item" th:classappend="${currentPage == 0} ? disabled : ''">
                         <a class="page-link" th:href="@{'/project/' + ${projectId} + '/questions?page=' + ${currentPage-1}}" tabindex="-1"

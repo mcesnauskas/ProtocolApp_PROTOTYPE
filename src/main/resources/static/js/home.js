@@ -7,8 +7,6 @@ document.getElementById('projectSelect').addEventListener('change', function() {
         document.getElementById('addParticipantsButton').href = '/project/' + projectId + '/participants';
     });
 
-    var buttons = document.querySelectorAll('#addQuestionsButton, #addParticipantsButton');
-
     buttons.forEach(function(button) {
         button.addEventListener('click', function(e) {
             var projectSelect = document.getElementById('projectSelect');
