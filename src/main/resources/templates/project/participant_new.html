@@ -85,7 +85,8 @@
 
         <div class="d-flex justify-content-center align-items-center mt-4 gap-4">
             <div>
-                <input type="submit" class="btn btn-primary" value="Add participant"/>
+                <input type="submit" class="btn btn-primary"
+                       th:value="${attrParticipant.participantId == null} ? 'Add participant' : 'Update participant'"/>
             </div>
         </div>
     </form>
